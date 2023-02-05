@@ -1,20 +1,44 @@
 import { restuarentlist } from "../config";
 import RestuarentCard from "./RestuarentCard";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
   // const [searchClicked, setSearchClicked] = useState();
-  const [restaurent, setRestaurent] = useState(restuarentlist);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [allRestaurants, setAllRestaurants] = useState([]);
 
   const filterData = (searchText, restaurent) => {
     const filteredData =restaurent.filter((restaurent) =>
-      restaurent.data.data.name.includes(searchText)
+      restaurent?.data?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
     );
     return filteredData
   };
 
-  return (
+  useEffect(() =>{
+    getRestaurents()
+  }, [])
+
+
+  async function getRestaurents (){
+    const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7039956&lng=77.04997&page_type=DESKTOP_WEB_LISTING')
+    debugger
+    const json = await data.json()
+    // console.log(json)
+    // console.log('hiihhihi',json?.data?.cards[2]?.data?.data?.cards)
+    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards)
+    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards)
+  }
+
+// early return
+  
+if(!allRestaurants) return null
+
+if(filteredRestaurants.length ===0)
+return <h1>No restaurants matches your filter</h1>
+
+  return (allRestaurants.length ===0) ? <Shimmer/> :      (
     <>
       <div className="search-container">
         <input
@@ -30,19 +54,22 @@ const Body = () => {
         <button
           className="search-btn"
           onClick={() => {
-            const data = filterData(searchText, restaurent);
-            setRestaurent(data)
+            const data = filterData(searchText, allRestaurants);
+            setFilteredRestaurants(data)
           }}
         >
           Search
         </button>
       </div>
       <div className="restaurent-list">
-        {restaurent.map((restaurent) => {
+        {/* {console.log(restaurent)} */}
+        {filteredRestaurants.map((restaurent) => {
           return (
+            
             <RestuarentCard
-              {...restaurent.data.data}
-              key={restaurent.data.data.id}
+              {...restaurent.data}
+              
+              key={restaurent?.data?.data?.id}
             />
           );
         })}
