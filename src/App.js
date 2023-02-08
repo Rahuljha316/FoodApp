@@ -5,25 +5,28 @@ import Header from './components/Header';
 import Body from './components/Body';
 import Footer from './components/Footer';
 import { IMG_CDN_URL } from "./config";
+import Shimmer from "./components/Shimmer.js";
+import { createBrowserRouter } from 'react-router-dom';
+
 
 
 const something = (
     <h1 id="title">Food Villa</h1>
 )
 
-
-
-
-
 const AppLayout = () =>{
     return (
-        <React.Fragment>
+        <React.Fragment>            
             <Header />
             <Body />
             <Footer />
         </React.Fragment>
     )
 }
+
+
+
+
 const jsx = (
     // <React.Fragment>
     <div  style={{

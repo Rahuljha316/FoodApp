@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import Logo from '../assets/img/food.png'
 // const loggedIn = () => {
 //   return true;
 // };
@@ -12,7 +12,7 @@ const Title = () => (
     <img
       alt="logo"
       className="logo"
-      src="https://scontent.fdel34-1.fna.fbcdn.net/v/t39.30808-6/302441959_486213156849687_1897954130219057783_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=zxylPaJODMoAX9bWAPa&_nc_ht=scontent.fdel34-1.fna&oh=00_AfCrLlrtvtP8CTiC7G-u8Gre8Kj3xHzMc5qsHeBoj3h-bA&oe=63DEC464"
+      src={Logo}
     ></img>
   </a>
 );

@@ -23,7 +23,7 @@ const Body = () => {
 
   async function getRestaurents (){
     const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7039956&lng=77.04997&page_type=DESKTOP_WEB_LISTING')
-    debugger
+    // debugger
     const json = await data.json()
     // console.log(json)
     // console.log('hiihhihi',json?.data?.cards[2]?.data?.data?.cards)
@@ -35,8 +35,8 @@ const Body = () => {
   
 if(!allRestaurants) return null
 
-if(filteredRestaurants.length ===0)
-return <h1>No restaurants matches your filter</h1>
+// if(filteredRestaurants.length ===0)
+// return <h1>No restaurants matches your filter</h1>
 
   return (allRestaurants.length ===0) ? <Shimmer/> :      (
     <>

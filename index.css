@@ -36,3 +36,11 @@
     display: flex;
     flex-wrap: wrap;
 }
+.shimmer-card{
+
+    width: 200px;
+    height: 200px;
+    background: rgba(128, 128, 128, 0.637);
+    margin: 20px;
+    
+}
