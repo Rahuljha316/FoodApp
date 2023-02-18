@@ -6,51 +6,84 @@ import Body from './components/Body';
 import Footer from './components/Footer';
 import { IMG_CDN_URL } from "./config";
 import Shimmer from "./components/Shimmer.js";
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter , RouterProvider, Outlet} from 'react-router-dom';
+import About from '../src/components/About'
+import Error from '../src/components/Error';
+import Contact from "./components/Contact";
+import RestaurentMenu from "./components/RestrauntMenu";
 
-
-
-const something = (
-    <h1 id="title">Food Villa</h1>
-)
 
 const AppLayout = () =>{
     return (
         <React.Fragment>            
             <Header />
-            <Body />
+            <Outlet />
             <Footer />
         </React.Fragment>
     )
 }
 
-
-
-
-const jsx = (
-    // <React.Fragment>
-    <div  style={{
-    border: '1px solid black'
-        }}>
-            <h1>Jsx</h1>
-        <h1>second jsx</h1>
-
-
-    </div>
+const appRouter = createBrowserRouter([
+    {
+        path:"/",
+        element: <AppLayout />,
+        errorElement: <Error />,
+        children: [
+            {
+                path:'/',
+                element:<Body />
+            },
+            {
+                path:'/about',
+                element: <About />,
+            },
+            {
+                path:'/contact',
+                element: <Contact />,
+            },
+            {
+                path: '/restaurent/:id',
+                element: <RestaurentMenu />
+            }
+        ]
+    },
+    // {
+    //     path:"/about",
+    //     element:<About />
+    // },
     
-    // </React.Fragment>
-)
+])
+
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
-root.render(<AppLayout />)
+root.render(<RouterProvider router={appRouter} />)
 
 
 
 
 
 
+// const jsx = (
+//      <React.Fragment>
+//     <div  style={{
+//     border: '1px solid black'
+//         }}>
+//             <h1>Jsx</h1>
+//         <h1>second jsx</h1>
 
+
+//     </div>
+    
+//      </React.Fragment>
+// )
+
+// const something = (
+//     <h1 id="title">Food Villa</h1>
+// )
 
 /**
  * 
@@ -132,14 +165,14 @@ root.render(<AppLayout />)
 //     );
 // }
 
-{/* <div class="header">
-        <h1>Namaste React</h1>
-        <ul>
-            <li>About Us</li>
-            <li>support</li>
-            <li>contact</li>
-        </ul>
-</div> */}   
+// {/* <div class="header">
+//         <h1>Namaste React</h1>
+//         <ul>
+//             <li>About Us</li>
+//             <li>support</li>
+//             <li>contact</li>
+//         </ul>
+// </div> */}   
 
 
 // root.render(container);

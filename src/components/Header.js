@@ -1,5 +1,7 @@
 import { useState } from "react";
-import Logo from '../assets/img/food.png'
+import Logo from "../assets/img/food.png";
+import { Link } from "react-router-dom";
+
 // const loggedIn = () => {
 //   return true;
 // };
@@ -9,32 +11,36 @@ const Title = () => (
   //     Food Villa
   // </h1>
   <a href="/">
-    <img
-      alt="logo"
-      className="logo"
-      src={Logo}
-    ></img>
+    <img alt="logo" className="logo" src={Logo}></img>
   </a>
 );
 
 const Header = () => {
-const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="header">
       <Title />
       <div className="nav-items">
         <ul>
-          <li>home</li>
-          <li>about</li>
+          <Link to="/">
+            <li>home</li>
+          </Link>
+          <Link to="/about">
+            <li>about</li>
+          </Link>
+          <Link to="/contact">
           <li>contact</li>
+
+          </Link>
           <li>cart</li>
         </ul>
       </div>
-      {isLoggedIn  ? 
-      (<button onClick={()=> setIsLoggedIn(false)}>logout</button>)
-      : (<button onClick={()=> setIsLoggedIn(true)}>login</button> )
-      }
+      {isLoggedIn ? (
+        <button onClick={() => setIsLoggedIn(false)}>logout</button>
+      ) : (
+        <button onClick={() => setIsLoggedIn(true)}>login</button>
+      )}
     </div>
   );
 };
