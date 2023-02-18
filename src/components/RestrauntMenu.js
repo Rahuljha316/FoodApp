@@ -6,6 +6,7 @@ import Shimmer from "./Shimmer";
 const RestaurentMenu = () => {
   const { id } = useParams();
   const [restaurent, setRestaurent] = useState(null);
+  console.log('hello'+ useState());
 
   // console.log(params);
   useEffect(() => {
