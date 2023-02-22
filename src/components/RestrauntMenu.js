@@ -1,26 +1,28 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../config";
+import useRestaurent from "../utils/useRestaurant";
 import Shimmer from "./Shimmer";
 
 const RestaurentMenu = () => {
   const { id } = useParams();
-  const [restaurent, setRestaurent] = useState(null);
+  // const [restaurent, setRestaurent] = useState(null);
   console.log('hello'+ useState());
+  const restaurent = useRestaurent(id)
 
   // console.log(params);
-  useEffect(() => {
-    getRestaurentInfo();
-  }, []);
+  // useEffect(() => {
+  //   getRestaurentInfo();
+  // }, []);
 
-  async function getRestaurentInfo() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/v4/full?lat=28.7039956&lng=77.04997&menuId="+id
-    );
-    const json = await data.json();
-    console.log(json);
-    setRestaurent(json.data);
-  }
+  // async function getRestaurentInfo() {
+  //   const data = await fetch(
+  //     "https://www.swiggy.com/dapi/menu/v4/full?lat=28.7039956&lng=77.04997&menuId="+id
+  //   );
+  //   const json = await data.json();
+  //   console.log(json);
+  //   setRestaurent(json.data);
+  // }
 
   return (!restaurent) ? <Shimmer/>: (
     <div className="menu">

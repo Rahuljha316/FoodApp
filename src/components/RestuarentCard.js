@@ -6,30 +6,14 @@ const RestuarentCard = ({
   lastMileDistance,
   cuisines,
 }) => {
-  // console.log(props.restuarent.data.data?.name)
-  // const {data:{
-  //     data:{name,
-  //     cuisines,
-  //     cloudinaryImageId,lastMileDistance
-
-  //     }
-  // }
-
-  // } = restuarent;
-  // const [name,cloudinaryImageId,lastMileDistance,cuisines] = restuarent.data
-
-  // console.log(name);
+  
   return (
-    <div className="card">
+    <div className="w-[200px] p-2 m-2 shadow-lg bg-pink-50">
       <img src={IMG_CDN_URL + cloudinaryImageId}></img>
-      {/* <h2>{props.restuarent.data.data?.name}</h2> */}
-      <h2>{name}</h2>
+      <h2 className="font-bold text-xl">{name}</h2>
       <h3>{cuisines?.join(" ,")}</h3>
       <h4>{lastMileDistance}</h4>
-      {/* <h2>{props.restuarent.data.data?.cuisines.join(' , ')}</h2>
-            <h3>{props.restuarent.data.data?.lastMileTravel} Minutes</h3> */}
-      {/* <h3>Burger ,American</h3>
-            <h2>Burger ,American</h2> */}
+     
     </div>
   );
 };

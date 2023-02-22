@@ -11,7 +11,7 @@ const Title = () => (
   //     Food Villa
   // </h1>
   <a href="/">
-    <img alt="logo" className="logo" src={Logo}></img>
+    <img alt="logo" className="h-28 py-2" src={Logo}></img>
   </a>
 );
 
@@ -19,21 +19,23 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <div className="header">
+    <div className="flex justify-between bg-pink-50 shadow-lg sm:bg-purple-200">
       <Title />
       <div className="nav-items">
-        <ul>
+        <ul className="flex py-10">
           <Link to="/">
-            <li>home</li>
+            <li className="px-2">home</li>
           </Link>
           <Link to="/about">
-            <li>about</li>
+            <li className="px-2">about</li>
           </Link>
           <Link to="/contact">
-          <li>contact</li>
+          <li className="px-2">contact</li>
 
           </Link>
-          <li>cart</li>
+          <li className="px-2">cart</li>
+          <Link to='/instamart'>
+          <li className="px-2">Instamart</li></Link>
         </ul>
       </div>
       {isLoggedIn ? (

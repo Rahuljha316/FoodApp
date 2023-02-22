@@ -3,48 +3,35 @@ import RestuarentCard from "./RestuarentCard";
 import { useState,useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from 'react-router-dom'
+import { filterData } from "../utils/helper";
+import useRestaurentHome from "../utils/useRestaurentHome";
+import { HiStatusOnline } from 'react-icons'
+import useOnline from "../utils/useOnline";
+
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
-  // const [searchClicked, setSearchClicked] = useState();
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [allRestaurants, setAllRestaurants] = useState([]);
-
-  const filterData = (searchText, restaurent) => {
-    const filteredData =restaurent.filter((restaurent) =>
-      restaurent?.data?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
-    );
-    return filteredData
-  };
-
-  useEffect(() =>{
-    getRestaurents()
-  }, [])
-
-
-  async function getRestaurents (){
-    const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7039956&lng=77.04997&page_type=DESKTOP_WEB_LISTING')
-    // debugger
-    const json = await data.json()
-    // console.log(json)
-    // console.log('hiihhihi',json?.data?.cards[2]?.data?.data?.cards)
-    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards)
-    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards)
-  }
-
+  const [filteredRestaurants,allRestaurants,setFilteredRestaurants] = useRestaurentHome([])
+  
+  const isOnline = useOnline()
 // early return
   
 if(!allRestaurants) return null
+
+if(!isOnline) return (
+  <div>Sorry not connected to internet</div>
+)
+
 
 // if(filteredRestaurants.length ===0)
 // return <h1>No restaurants matches your filter</h1>
 
   return (allRestaurants.length ===0) ? <Shimmer/> :      (
     <>
-      <div className="search-container">
+      <div className="search-container p-5 bg-yellow-100 my-5">
         <input
           type="text"
-          className="search-input"
+          className="focus:bg-green-100 p-2 m-2"
           placeholder="Search"
           value={searchText}
           onChange={(e) => {
@@ -53,7 +40,7 @@ if(!allRestaurants) return null
         />
         {/* <h1>{searchClicked}</h1> */}
         <button
-          className="search-btn"
+          className="p-2 m-2 bg-purple-500 text-white rounded-md hover:bg-violet-600"
           onClick={() => {
             const data = filterData(searchText, allRestaurants);
             setFilteredRestaurants(data)
@@ -62,7 +49,7 @@ if(!allRestaurants) return null
           Search
         </button>
       </div>
-      <div className="restaurent-list">
+      <div className="flex flex-wrap">
         {/* {console.log(restaurent)} */}
         {filteredRestaurants.map((restaurent) => {
           return (
@@ -86,18 +73,3 @@ if(!allRestaurants) return null
 
 export default Body;
 
-{
-  /* {RestuarentCard(restuarentlist[0])} */
-}
-
-{
-  /* <RestuarentCard {...restuarentlist[0].data.data}/>
-            <RestuarentCard {...restuarentlist[1].data.data}/>
-            <RestuarentCard {...restuarentlist[2].data.data}/>
-            <RestuarentCard {...restuarentlist[3].data.data}/>
-            <RestuarentCard {...restuarentlist[4].data.data}/> */
-}
-{
-  /* <RestuarentCard restuarent={restuarentlist[5]}/>
-            <RestuarentCard restuarent={restuarentlist[6]}/> */
-}
