@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 // import Title from './components/Title.js'
 import Header from "./components/Header";
@@ -35,7 +35,16 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />,
+        element: <Body 
+        user={
+          {
+            name: 'Rahul Jha',
+            email: 'rahul@rahul.com',
+          }
+
+
+        }
+        />,
       },
       {
         path: "/about",

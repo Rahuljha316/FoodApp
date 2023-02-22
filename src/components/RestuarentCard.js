@@ -5,6 +5,7 @@ const RestuarentCard = ({
   cloudinaryImageId,
   lastMileDistance,
   cuisines,
+  user
 }) => {
   
   return (
@@ -13,6 +14,7 @@ const RestuarentCard = ({
       <h2 className="font-bold text-xl">{name}</h2>
       <h3>{cuisines?.join(" ,")}</h3>
       <h4>{lastMileDistance}</h4>
+      <h4>{user.name}</h4>
      
     </div>
   );

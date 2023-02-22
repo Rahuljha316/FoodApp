@@ -10,19 +10,6 @@ const RestaurentMenu = () => {
   console.log('hello'+ useState());
   const restaurent = useRestaurent(id)
 
-  // console.log(params);
-  // useEffect(() => {
-  //   getRestaurentInfo();
-  // }, []);
-
-  // async function getRestaurentInfo() {
-  //   const data = await fetch(
-  //     "https://www.swiggy.com/dapi/menu/v4/full?lat=28.7039956&lng=77.04997&menuId="+id
-  //   );
-  //   const json = await data.json();
-  //   console.log(json);
-  //   setRestaurent(json.data);
-  // }
 
   return (!restaurent) ? <Shimmer/>: (
     <div className="menu">

@@ -9,7 +9,7 @@ import { HiStatusOnline } from 'react-icons'
 import useOnline from "../utils/useOnline";
 
 
-const Body = () => {
+const Body = ({user}) => {
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants,allRestaurants,setFilteredRestaurants] = useRestaurentHome([])
   
@@ -58,7 +58,7 @@ if(!isOnline) return (
 
             >
             <RestuarentCard
-              {...restaurent.data}
+              {...restaurent.data} user = {user}
               
             />
             </Link>
