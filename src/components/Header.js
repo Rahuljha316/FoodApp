@@ -1,15 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Logo from "../assets/img/food.png";
 import { Link } from "react-router-dom";
-
-// const loggedIn = () => {
-//   return true;
-// };
+import UserContext from "../utils/UserContext";
 
 const Title = () => (
-  // <h1 id="title" key="h2">
-  //     Food Villa
-  // </h1>
   <a href="/">
     <img alt="logo" className="h-28 py-2" src={Logo}></img>
   </a>
@@ -17,6 +11,7 @@ const Title = () => (
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user } = useContext(UserContext);
 
   return (
     <div className="flex justify-between bg-pink-50 shadow-lg sm:bg-purple-200">
@@ -30,14 +25,15 @@ const Header = () => {
             <li className="px-2">about</li>
           </Link>
           <Link to="/contact">
-          <li className="px-2">contact</li>
-
+            <li className="px-2">contact</li>
           </Link>
           <li className="px-2">cart</li>
-          <Link to='/instamart'>
-          <li className="px-2">Instamart</li></Link>
+          <Link to="/instamart">
+            <li className="px-2">Instamart</li>
+          </Link>
         </ul>
       </div>
+      <div className="p-10 font-bold text-red-900">{user.name}-{user.email}</div>
       {isLoggedIn ? (
         <button onClick={() => setIsLoggedIn(false)}>logout</button>
       ) : (

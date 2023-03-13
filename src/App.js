@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense, useContext, useState } from "react";
 import ReactDOM from "react-dom/client";
 // import Title from './components/Title.js'
 import Header from "./components/Header";
@@ -12,17 +12,27 @@ import Error from "../src/components/Error";
 import Contact from "./components/Contact";
 import RestaurentMenu from "./components/RestrauntMenu";
 import Profile from "./components/Profile";
-
+import UserContext from "./utils/UserContext";
 //lazyloading
 
 const Instamart = lazy(() => import("./components/Instamart"));
 
 const AppLayout = () => {
+  
+  const [user, setUser] = useState({
+    name: 'Rahul Jha',
+    email: 'rahul@gmail.com'
+  })
   return (
     <React.Fragment>
-      <Header />
-      <Outlet />
-      <Footer />
+      <UserContext.Provider value={{
+        user:user, setUser : setUser
+      }
+        }>
+        <Header />
+        <Outlet />
+        <Footer />
+      </UserContext.Provider>
     </React.Fragment>
   );
 };
@@ -35,16 +45,14 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body 
-        user={
-          {
-            name: 'Rahul Jha',
-            email: 'rahul@rahul.com',
-          }
-
-
-        }
-        />,
+        element: (
+          <Body
+            user={{
+              name: "Rahul Jha",
+              email: "rahul@rahul.com",
+            }}
+          />
+        ),
       },
       {
         path: "/about",
@@ -74,7 +82,6 @@ const appRouter = createBrowserRouter([
       },
     ],
   },
-  
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
